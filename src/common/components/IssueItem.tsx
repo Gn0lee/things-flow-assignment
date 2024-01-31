@@ -2,24 +2,31 @@
 
 import { css } from '@emotion/react';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 import { IssueInfo } from 'common/types/issue.type';
 
 interface IssueItemProps extends IssueInfo {}
 
-export default function IssueItem({ comments, created_at, user, title, number }: IssueItemProps) {
+export default function IssueItem({ comments, created_at: createAt, user, title, number, id }: IssueItemProps) {
+	const navigate = useNavigate();
+
+	const handleClickItem = () => {
+		navigate(`/${id}`);
+	};
+
 	return (
-		<a css={containerSt}>
+		<button css={containerSt} onClick={handleClickItem}>
 			<div css={leftContentBoxSt}>
 				<h3>
 					#{number} {title}
 				</h3>
 				<p>
-					작성자: {user.login}, 작성일: {moment(created_at).format('YYYY.MM.DD')}
+					작성자: {user.login}, 작성일: {moment(createAt).format('YYYY.MM.DD')}
 				</p>
 			</div>
 			<p>코멘트: {comments}</p>
-		</a>
+		</button>
 	);
 }
 
@@ -34,6 +41,8 @@ const containerSt = css`
 	border: 1px solid darkgray;
 
 	border-radius: 8px;
+
+	cursor: pointer;
 `;
 
 const leftContentBoxSt = css`

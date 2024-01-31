@@ -21,10 +21,13 @@ export default function AdvertisementBanner({
 }
 
 const containerSt = css`
-	width: fit-content;
-	height: fit-content;
+	width: 100%;
+	height: 100%;
 `;
 
 const imgSt = css`
+	width: 100%;
+	height: 100%;
+
 	object-fit: contain;
 `;

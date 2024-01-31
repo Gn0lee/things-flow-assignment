@@ -3,8 +3,10 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Global, css } from '@emotion/react';
+import { Provider } from 'react-redux';
 
 import Router from 'routes/Router';
+import store from 'common/redux/store';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -15,8 +17,10 @@ const queryClient = new QueryClient({
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Global styles={[globalSt]} />
-			<Router />
+			<Provider store={store}>
+				<Global styles={[globalSt]} />
+				<Router />
+			</Provider>
 		</QueryClientProvider>
 	);
 }

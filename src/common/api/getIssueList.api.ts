@@ -10,7 +10,7 @@ export interface GetIssueListApiProps {
 export default async function getIssueListApi({
 	perPage = 10,
 	page,
-	q = 'is:issue repo:angular/angular-cli sort:comments-desc',
+	q = 'is:issue is:open repo:angular/angular-cli sort:comments-desc',
 }: GetIssueListApiProps) {
 	const { data } = await githubApiInstance.get<GetIssueListResponse>('/search/issues', {
 		params: { q, per_page: perPage, page },

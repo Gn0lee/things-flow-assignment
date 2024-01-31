@@ -17,5 +17,7 @@ export default function useGetIssueListQuery(props?: { onSuccess?: (data?: GetIs
 				props.onSuccess(data.pages.at(-1));
 			}
 		},
+		cacheTime: 600000,
+		staleTime: 600000,
 	});
 }

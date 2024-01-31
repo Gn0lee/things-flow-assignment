@@ -5,14 +5,18 @@ import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
 import { IssueInfo } from 'common/types/issue.type';
+import { useAppDispatch } from 'common/redux/store';
+import { resetPage } from 'common/redux/pageSlice';
 
 interface IssueItemProps extends IssueInfo {}
 
-export default function IssueItem({ comments, created_at: createAt, user, title, number, id }: IssueItemProps) {
+export default function IssueItem({ comments, created_at: createdAt, user, title, number }: IssueItemProps) {
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const handleClickItem = () => {
-		navigate(`/${id}`);
+		navigate(`/${number}`);
+		dispatch(resetPage());
 	};
 
 	return (
@@ -22,7 +26,7 @@ export default function IssueItem({ comments, created_at: createAt, user, title,
 					#{number} {title}
 				</h3>
 				<p>
-					작성자: {user.login}, 작성일: {moment(createAt).format('YYYY.MM.DD')}
+					작성자: {user.login}, 작성일: {moment(createdAt).format('YYYY.MM.DD')}
 				</p>
 			</div>
 			<p>코멘트: {comments}</p>
